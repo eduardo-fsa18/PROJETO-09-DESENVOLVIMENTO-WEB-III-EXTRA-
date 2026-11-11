@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "aluno": "VV",
+    "email": "VV@gmail.com",
+    "salaId": 1,
+    "data": "2026-11-09",
+    "horarioInicio": "19:36",
+    "horarioFim": "20:36",
+    "participantes": 30,
+    "finalidade": "Halloween",
+    "status": "Ativa"
+  }
+]

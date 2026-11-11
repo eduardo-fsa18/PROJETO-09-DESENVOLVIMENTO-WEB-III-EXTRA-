@@ -1,0 +1,277 @@
+/**
+ * @file style.css
+ * @description Estilização global da aplicação web de reserva de salas.
+ * Organiza layout responsivo, formulários, tabelas, botões, alertas e badges de status.
+ */
+
+/* -------------------------------------------------------------
+   1. RESET E CONFIGURAÇÕES GERAIS
+   ------------------------------------------------------------- */
+* {
+  box-sizing: border-box; /* Garante que padding e bordas não alterem o tamanho final dos elementos */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif; /* Tipografia limpa e padrão */
+}
+
+body {
+  background-color: #f4f6f9; /* Fundo cinza-claro para descanso visual */
+  color: #333333;             /* Cor de texto principal em tom escuro */
+  padding: 20px;
+  line-height: 1.5;
+}
+
+/* Cabeçalho principal da página */
+header {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+header h1 {
+  color: #2c3e50;
+  font-size: 2rem;
+}
+
+/* Container central de conteúdo */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* -------------------------------------------------------------
+   2. CARDS EESTRUTURA SEÇÕES
+   ------------------------------------------------------------- */
+/* Cartão de fundo branco para destacar seções do sistema */
+.card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Sombra suave de profundidade */
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 8px;
+}
+
+h3 {
+  font-size: 1.1rem;
+  color: #34495e;
+  margin-top: 25px;
+  margin-bottom: 12px;
+}
+
+/* -------------------------------------------------------------
+   3. FORMULÁRIOS E INPUTS
+   ------------------------------------------------------------- */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #4a5568;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e0;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Destaque ao focar no campo */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
+/* Área de filtros alinhada em linha */
+.filter-box {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  background-color: #f8fafc;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.filter-box input,
+.filter-box select {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* -------------------------------------------------------------
+   4. BOTÕES
+   ------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  padding: 9px 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Variações de cor dos botões de ação */
+.btn-primary {
+  background-color: #27ae60; /* Verde para ações de salvar e confirmar */
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background-color: #7f8c8d; /* Cinza para acões neutras e filtros */
+  color: #ffffff;
+}
+
+.btn-warning {
+  background-color: #f39c12; /* Laranja para edição */
+  color: #ffffff;
+}
+
+.btn-danger {
+  background-color: #c0392b; /* Vermelho para exclusão e cancelamento */
+  color: #ffffff;
+}
+
+/* -------------------------------------------------------------
+   5. TABELAS DE DADOS
+   ------------------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+th {
+  background-color: #edf2f7;
+  color: #2d3748;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f8fafc; /* Efeito zebra nas linhas */
+}
+
+/* -------------------------------------------------------------
+   6. BADGES DE STATUS (IDENTIFICAÇÃO VISUAL)
+   ------------------------------------------------------------- */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* Estilos de identificação do status de Salas e Reservas */
+.badge-ativa,
+.badge-disponivel {
+  background-color: #c6f6d5;
+  color: #22543d; /* Verde escuro */
+}
+
+.badge-cancelada,
+.badge-inativa {
+  background-color: #fed7d7;
+  color: #742a2a; /* Vermelho escuro */
+}
+
+/* -------------------------------------------------------------
+   7. QUADRO DE MENSAGENS E ALERTAS
+   ------------------------------------------------------------- */
+.alert {
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Variação Informativa (ex: Feriados da BrasilAPI) */
+.alert-info {
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+  border: 1px solid #bee3f8;
+}
+
+/* Variação de Sucesso (ex: Cadastro efetuado) */
+.alert-success {
+  background-color: #f0fff4;
+  color: #276749;
+  border: 1px solid #c6f6d5;
+}
+
+/* Variação de Erro e Conflito (ex: Regras de negócio violadas) */
+.alert-error {
+  background-color: #fff5f5;
+  color: #9b2c2c;
+  border: 1px solid #feb2b2;
+}
+
+/* Classe utilitária para ocultar elementos da interface */
+.hidden {
+  display: none !important;
+}
+
+/* -------------------------------------------------------------
+   8. RESPONSIVIDADE (DISPOSITIVOS MÓVEIS)
+   ------------------------------------------------------------- */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  /* Torna a tabela rolável em telas pequenas */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .filter-box {
+    flex-direction: column;
+  }
+
+  .filter-box input,
+  .filter-box select {
+    min-width: 100%;
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "sistema-reserva-salas",
+  "version": "1.0.0",
+  "description": "Sistema de Reserva de Salas - Web III",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Helder Virissio Araujo",
+  "license": "MIT"
+}

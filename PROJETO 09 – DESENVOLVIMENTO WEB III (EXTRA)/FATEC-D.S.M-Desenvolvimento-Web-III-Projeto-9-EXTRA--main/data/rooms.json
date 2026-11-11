@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nome": "Laboratório de Informática 1",
+    "localizacao": "Bloco A - Sala 102",
+    "capacidade": 30,
+    "recursos": "Computadores, Projetor, Ar-condicionado",
+    "situacao": "Disponivel"
+  },
+  {
+    "id": 2,
+    "nome": "Sala de Estudo 03",
+    "localizacao": "Biblioteca - Terreo",
+    "capacidade": 6,
+    "recursos": "Lousa branca, Tomadas",
+    "situacao": "Disponivel"
+  }
+]

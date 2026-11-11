@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Reserva de Salas — CRUD & API REST</title>
+  
+  <!-- Estilos visuais externos da aplicação -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  
+  <!-- Cabeçalho Principal -->
+  <header>
+    <h1>Sistema de Reserva de Salas e Laboratórios</h1>
+  </header>
+
+  <main>
+    <!-- 
+      Caixa de Alerta Dinâmica
+      Exibe mensagens de erro, sucesso, validações e alertas da BrasilAPI 
+    -->
+    <div id="alert-box" class="alert hidden" role="alert"></div>
+
+    <!-- =========================================================
+         SEÇÃO 1: CADASTRO E GERENCIAMENTO DE SALAS
+         ========================================================= -->
+    <section class="card">
+      <h2>Cadastrar / Editar Sala</h2>
+      
+      <!-- Formulário de Salas -->
+      <form id="form-sala">
+        <!-- Campo oculto para armazenar o ID da sala em modo de edição -->
+        <input type="hidden" id="sala-id">
+
+        <div class="form-group">
+          <label for="sala-nome">Nome / Identificação da Sala *</label>
+          <input type="text" id="sala-nome" placeholder="Ex: Laboratório de Informática 1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="sala-localizacao">Localização *</label>
+          <input type="text" id="sala-localizacao" placeholder="Ex: Bloco A - 1º Andar" required>
+        </div>
+
+        <div class="form-group">
+          <label for="sala-capacidade">Capacidade Máxima de Pessoas *</label>
+          <input type="number" id="sala-capacidade" min="1" placeholder="Ex: 30" required>
+        </div>
+
+        <div class="form-group">
+          <label for="sala-recursos">Recursos Disponíveis</label>
+          <input type="text" id="sala-recursos" placeholder="Ex: Projetor, Ar-condicionado, Lousa digital">
+        </div>
+
+        <div class="form-group">
+          <label for="sala-situacao">Situação da Sala *</label>
+          <select id="sala-situacao" required>
+            <option value="Disponivel">Disponível</option>
+            <option value="Inativa">Inativa</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Sala</button>
+        <button type="button" id="btn-cancelar-sala" class="btn btn-secondary hidden">Cancelar Edição</button>
+      </form>
+
+      <h3>Salas Cadastradas</h3>
+      <!-- Tabela de Listagem de Salas -->
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Localização</th>
+            <th>Capacidade</th>
+            <th>Recursos</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="lista-salas">
+          <!-- As linhas serão preenchidas dinamicamente via main.js -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- =========================================================
+         SEÇÃO 2: CADASTRO E GERENCIAMENTO DE RESERVAS
+         ========================================================= -->
+    <section class="card">
+      <h2>Cadastrar / Editar Reserva</h2>
+      
+      <!-- Formulário de Reservas -->
+      <form id="form-reserva">
+        <!-- Campo oculto para armazenar o ID da reserva em modo de edição -->
+        <input type="hidden" id="reserva-id">
+
+        <div class="form-group">
+          <label for="reserva-aluno">Nome do Aluno Responsável *</label>
+          <input type="text" id="reserva-aluno" placeholder="Ex: Helder Virissio Araujo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reserva-email">E-mail do Aluno *</label>
+          <input type="email" id="reserva-email" placeholder="Ex: aluno@fatec.sp.gov.br" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reserva-sala">Sala Selecionada *</label>
+          <select id="reserva-sala" required>
+            <!-- Opções carregadas dinamicamente via JavaScript -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="reserva-data">Data da Reserva *</label>
+          <input type="date" id="reserva-data" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reserva-inicio">Horário Inicial *</label>
+          <input type="time" id="reserva-inicio" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reserva-fim">Horário Final *</label>
+          <input type="time" id="reserva-fim" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reserva-participantes">Quantidade de Participantes *</label>
+          <input type="number" id="reserva-participantes" min="1" placeholder="Ex: 5" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reserva-finalidade">Finalidade da Reserva *</label>
+          <input type="text" id="reserva-finalidade" placeholder="Ex: Reunião do Projeto Integrador" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reserva-status">Status da Reserva *</label>
+          <select id="reserva-status" required>
+            <option value="Ativa">Ativa</option>
+            <option value="Cancelada">Cancelada</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Reserva</button>
+        <button type="button" id="btn-cancelar-reserva" class="btn btn-secondary hidden">Cancelar Edição</button>
+      </form>
+
+      <!-- Painel de Filtros e Pesquisas de Reservas -->
+      <h3>Consultar e Filtrar Reservas</h3>
+      <div class="filter-box">
+        <input type="date" id="filtro-data" title="Filtrar por data">
+        <select id="filtro-sala" title="Filtrar por sala">
+          <option value="">Todas as Salas</option>
+        </select>
+        <select id="filtro-status" title="Filtrar por status">
+          <option value="">Todos os Status</option>
+          <option value="Ativa">Ativa</option>
+          <option value="Cancelada">Cancelada</option>
+        </select>
+        <button id="btn-filtrar" type="button" class="btn btn-secondary">Aplicar Filtros</button>
+      </div>
+
+      <h3>Listagem de Reservas</h3>
+      <!-- Tabela de Reservas -->
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Aluno Responsável</th>
+            <th>Sala</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Participantes</th>
+            <th>Finalidade</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="lista-reservas">
+          <!-- As linhas serão preenchidas dinamicamente via main.js -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Script principal assíncrono do lado do cliente -->
+  <script src="js/main.js"></script>
+</body>
+</html>
